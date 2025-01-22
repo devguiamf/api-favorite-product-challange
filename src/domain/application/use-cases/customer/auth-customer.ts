@@ -3,6 +3,7 @@ import { Email } from 'src/domain/enterprise/entities/value-objects/email';
 import { Customer } from 'src/domain/enterprise/entities/customer';
 import { CustomerRepository } from '../../repositories/customer-repository.interface';
 import { CustomerNotFoundError } from './errors/customer-not-found';
+import { UseCase } from 'src/core/types/use-case';
 
 
 export type AuthCustomerRequest = {
@@ -16,7 +17,7 @@ export type AuthCustomerResponse = {
 };
 
 @Injectable()
-export class AuthCustomerUseCase {
+export class AuthCustomerUseCase implements UseCase<AuthCustomerRequest, AuthCustomerResponse>{
   constructor(private readonly customerRepo: CustomerRepository) {}
 
   async execute(request: AuthCustomerRequest): Promise<AuthCustomerResponse> {

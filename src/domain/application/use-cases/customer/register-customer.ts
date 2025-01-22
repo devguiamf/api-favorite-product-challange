@@ -3,6 +3,7 @@ import { Email } from 'src/domain/enterprise/entities/value-objects/email';
 import { Customer } from 'src/domain/enterprise/entities/customer';
 import { CustomerRepository } from '../../repositories/customer-repository.interface';
 import { EmailIsAlreadyExistError } from './errors/email-already-exist';
+import { UseCase } from 'src/core/types/use-case';
 
 export type RegisterCustomerRequest = {
   email: Email;
@@ -13,7 +14,7 @@ export type RegisterCustomerRequest = {
 export type RegisterCustomerResponse = void;
 
 @Injectable()
-export class RegisterCustomerUseCase {
+export class RegisterCustomerUseCase implements UseCase<RegisterCustomerRequest, RegisterCustomerResponse> {
   constructor(private readonly customerRepo: CustomerRepository) {}
 
   async execute(
