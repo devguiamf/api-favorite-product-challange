@@ -22,7 +22,8 @@ export const MONGO_DB_CONNECTION_PROVIDER: Provider<MongoClient> = {
 
 async function createIndexes(client: MongoClient) {
   const db = client.db();
-  const customersCollection = db.collection('favorite-list');
-
-  await customersCollection.createIndex({ userId: 1 }, { unique: true });
+  const customersCollection = db.collection('customer');
+  await customersCollection.createIndex({ email: 1 }, { unique: true });
+  const favoriteListCollection = db.collection('favorite-list');
+  await favoriteListCollection.createIndex({ userId: 1 }, { unique: true });
 }
