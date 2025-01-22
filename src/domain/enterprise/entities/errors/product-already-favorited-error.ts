@@ -1,11 +1,11 @@
 
 import { BaseError } from 'src/core/errors/base-error';
-import { FavoriteList } from '../favorite-list';
+import { Product } from '../product';
 
-export class FavoriteListIsFullError extends BaseError {
-  constructor(listFavorite: FavoriteList) {
+export class ProductAlreadyFavoritedError extends BaseError {
+  constructor(product: Product) {
     super({
-      message: `Lista de favoritos ${listFavorite.title} (${listFavorite.id.toString()}) está cheia`,
+      message: `Produto ${product.title} (${product.id.toString()}) já foi favoritado`,
     });
   }
 }

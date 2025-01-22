@@ -2,6 +2,7 @@ import { Entity } from "src/core/entity/entity";
 import { UniqueEntityID } from "src/core/entity/unique-entity-id";
 
 export type ProductProps = {
+  productApiId: number;
   title: string;
   price: number;
   image: string;
@@ -10,6 +11,7 @@ export type ProductProps = {
 };
 
 export class Product extends Entity<ProductProps> {
+
 
   public static create(
     props: ProductProps,
@@ -43,5 +45,9 @@ export class Product extends Entity<ProductProps> {
 
   get category(): string {
     return this.props.category;
+  }
+
+  get productApiId(): number {
+    return this.props.productApiId;
   }
 }

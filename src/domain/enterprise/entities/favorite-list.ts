@@ -1,39 +1,50 @@
 
 import { Entity } from 'src/core/entity/entity';
 import { UniqueEntityID } from 'src/core/entity/unique-entity-id';
-import { ProductAlreadyFavoritedError } from './errors/favorite-list-is-full.error';
-import { Product } from './product';
+import { Product, ProductProps } from './product';
+import { FavoriteListIsFullError } from './errors/favorite-list-is-full.error';
+import { ProductAlreadyFavoritedError } from './errors/product-already-favorited-error';
 
 
 export type FavoriteListProps = {
   title: string;
   description?: string;
   userId: string;
-  products?: Product[];
+  products: Product[];
 };
 
 export class FavoriteList extends Entity<FavoriteListProps> {
   #newFavoritedProducts: Product[] = [];
 
+  favoriteProduct(newProduct: Product, favoritList: FavoriteList) {
 
-  favoriteProduct(newProduct: Product, productLsit: Product[]) {
-    productLsit.forEach((product) => {
-      const productAlreadyFavorited = this.#newFavoritedProducts.some(
-        (favoritedProduct) => favoritedProduct.id.equals(newProduct.id),
-      );
+    if(favoritList.products.length >= 5) {
+      new FavoriteListIsFullError(this);
+    }
+    
+    if(favoritList.products.length === 0){
+      this.props.products.push(newProduct);
+    }
 
-      if (productAlreadyFavorited) {
-        throw new ProductAlreadyFavoritedError(product);
-      }
-
-      this.#newFavoritedProducts.push(product);
-    });
+    else{
+      favoritList.products.forEach((product) => {
+        const productAlreadyFavorited = this.props.products.some(
+          (favoritedProduct) => favoritedProduct.id.equals(newProduct.id),
+        );
+  
+        if (productAlreadyFavorited) {
+          throw new ProductAlreadyFavoritedError(product);
+        }
+  
+        this.props.products.push(product);
+      });
+    }    
   }
 
-  unfavoriteProduct(productId: UniqueEntityID, productLsit: Product[]) {
+  unfavoriteProduct(productApiId: number, productLsit: Product[]) {
     productLsit.forEach((product) => {
       const productAlreadyFavorited = this.#newFavoritedProducts.some(
-        (favoritedProduct) => favoritedProduct.id.equals(productId),
+        (favoritedProduct) => favoritedProduct.productApiId === productApiId,
       );
 
       if (!productAlreadyFavorited) {
@@ -41,6 +52,8 @@ export class FavoriteList extends Entity<FavoriteListProps> {
       }
 
       this.#newFavoritedProducts.push(product);
+
+      this.props.products = this.#newFavoritedProducts;
     });
   }
 
@@ -72,8 +85,12 @@ export class FavoriteList extends Entity<FavoriteListProps> {
     this.props.products = value;
   }
 
-  get products() {
+  get products(): Product[] {
     return this.props.products ?? [];
+  }
+
+  get ProductPros() {
+    return this.props;
   }
 
   public static create(props: FavoriteListProps) {

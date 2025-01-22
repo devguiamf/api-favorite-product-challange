@@ -6,7 +6,7 @@ import { FavoriteListRepository } from '../../repositories/favorite-list-reposit
 
 export type UnFavoriteProductRequest = {
   userId: string;
-  productId: string;
+  productId: number;
 };
 
 export type UnFavoriteProductResponse = void;
@@ -31,9 +31,9 @@ export class UnFavoriteProductUseCase
         new UniqueEntityID(request.userId),
       );
 
-      favoriteList.unfavoriteProduct(new UniqueEntityID(request.productId), favoriteList.products);
+      favoriteList.unfavoriteProduct(request.productId, favoriteList.products);
 
-      await this.favoriteListRepo.favoriteProdcut(favoriteList);
+      await this.favoriteListRepo.unfavoriteProduct(favoriteList.id, favoriteList.products);
     } catch (error) {
       throw error;
     }

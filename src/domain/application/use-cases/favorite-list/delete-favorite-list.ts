@@ -25,7 +25,12 @@ export class DeleteFavoriteListUseCase
       const exists = await this.favoriteListRepo.exists(entityId);
 
       if (!exists) {
-        throw new EntityNotFoundError('FavoriteList', request.userId);
+        throw new EntityNotFoundError(
+          'FavoriteList',
+          request.userId,
+          'Usuário não encontrado',
+          'Verifique se o id do usuário está correto',
+        );
       }
 
       await this.favoriteListRepo.delete(entityId);

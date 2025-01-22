@@ -33,12 +33,15 @@ export class CreateFavoriteListUseCase
         title: request.title,
         description: request.description,
         userId: request.userId,
+        products: [],
       });
 
       await this.favoriteListRepo.save(favoriteList);
 
       return favoriteList;
     } catch (error) {
+      console.log('error', error);
+      
       throw error;
     }
   }

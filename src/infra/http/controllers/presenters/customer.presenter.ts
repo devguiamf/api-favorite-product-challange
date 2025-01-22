@@ -10,7 +10,7 @@ export type CustomerHttpResponse = {
 };
 
 export class CustomerPresenter {
-  static toHTTP(customer: Customer, token): CustomerHttpResponse {
+  static toHTTP(customer: Customer, token: string): CustomerHttpResponse {
     return {
       token: token,
       user: {

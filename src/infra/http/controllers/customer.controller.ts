@@ -16,7 +16,6 @@ export class CustomerController {
   ) {}
 
   @Post('auth')
-  @HttpCode(204)
   async authenticateCustomer(
     @Body(new ZodValidationPipe(AuthCustomerSchema))
     body: TAuthCustomerSchema,
@@ -33,7 +32,7 @@ export class CustomerController {
       }, customer.user.id);
 
       const token = 'token';
-      
+
       return CustomerPresenter.toHTTP(customerRestore, token);
     } catch (error) {
       throw error;
@@ -41,17 +40,18 @@ export class CustomerController {
   }
 
   @Post('register')
-  @HttpCode(204)
   async registerCustomer(
     @Body(new ZodValidationPipe(RegisterCustomerSchema))
     body: TRegisterCustomerSchema,
-  ): Promise<void> {
+  ): Promise<string> {
     try {
       await this.registerCustomerUseCase.execute({
         email: Email.create(body.email),
         password: body.password,
         name: body.name,
       });
+
+      return "Cadastro realizado com sucesso";
     } catch (error) {
       throw error;
     }

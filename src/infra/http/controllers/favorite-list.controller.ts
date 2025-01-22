@@ -17,11 +17,26 @@ import { FavoriteProductUseCase } from 'src/domain/application/use-cases/favorit
 import { UniqueEntityID } from 'src/core/entity/unique-entity-id';
 import { Product } from 'src/domain/enterprise/entities/product';
 import { UnFavoriteProductUseCase } from 'src/domain/application/use-cases/favorite-list/unfavorite-product';
-import { FavoriteListHttpResponse, FavoriteListPresenter } from './presenters/favorite-list.presenter';
-import { TUpdateFavoriteListSchema, UpdateFavoriteListSchema } from './schema/favorite-list/update-favorite-list.schema';
-import { CreateFavoriteListSchema, TCreateFavoriteListSchema } from './schema/favorite-list/create-favorite-list.schema';
-import { FavoriteProductSchema, TFavoriteProductSchema } from './schema/favorite-list/favorite-product.schema';
-import { TUnFavoriteProductSchema, UnFavoriteProductSchema } from './schema/favorite-list/unfavorite-product.schema';
+import {
+  FavoriteListHttpResponse,
+  FavoriteListPresenter,
+} from './presenters/favorite-list.presenter';
+import {
+  TUpdateFavoriteListSchema,
+  UpdateFavoriteListSchema,
+} from './schema/favorite-list/update-favorite-list.schema';
+import {
+  CreateFavoriteListSchema,
+  TCreateFavoriteListSchema,
+} from './schema/favorite-list/create-favorite-list.schema';
+import {
+  FavoriteProductSchema,
+  TFavoriteProductSchema,
+} from './schema/favorite-list/favorite-product.schema';
+import {
+  TUnFavoriteProductSchema,
+  UnFavoriteProductSchema,
+} from './schema/favorite-list/unfavorite-product.schema';
 
 @Controller('favorite-list')
 export class FavoriteListController {
@@ -34,11 +49,12 @@ export class FavoriteListController {
     private readonly unfavoriteProductUseCase: UnFavoriteProductUseCase,
   ) {}
 
-  @Get(':userId')
+  @Get(':id')
   async getFavoriteListById(
-    @Param('userId') id: string,
+    @Param('id') id: string,
   ): Promise<FavoriteListHttpResponse> {
     try {
+
       const favoriteList = await this.GetFavoriteListByIdUseCase.execute({
         userId: id,
       });
@@ -99,7 +115,6 @@ export class FavoriteListController {
   }
 
   @Post(':userId/favorite-product')
-  @HttpCode(204)
   async favoriteProduct(
     @Body(new ZodValidationPipe(FavoriteProductSchema))
     body: TFavoriteProductSchema,
@@ -110,16 +125,18 @@ export class FavoriteListController {
         userId: userId,
         product: Product.restore(
           {
-            title: body.product.title,
-            price: body.product.price,
-            image: body.product.image,
-            category: body.product.category,
-            description: body.product.description,
+            productApiId: body.productApiId,
+            title: body.title,
+            price: body.price,
+            image: body.image,
+            category: body.category,
+            description: body.description,
           },
-          new UniqueEntityID(body.product.id),
+          new UniqueEntityID()
         ),
       });
     } catch (error) {
+      console.log('error', error);
       throw error;
     }
   }

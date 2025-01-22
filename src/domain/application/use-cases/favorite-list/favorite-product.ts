@@ -32,9 +32,9 @@ export class FavoriteProductUseCase
         new UniqueEntityID(request.userId),
       );
 
-      favoriteList.favoriteProduct(request.product, favoriteList.products);
+      favoriteList.favoriteProduct(request.product, favoriteList);
 
-      await this.favoriteListRepo.favoriteProdcut(favoriteList);
+      await this.favoriteListRepo.favoriteProduct(favoriteList.id, favoriteList.products);
     } catch (error) {
       throw error;
     }

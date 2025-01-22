@@ -8,6 +8,7 @@ import { FavoriteListRepository } from 'src/domain/application/repositories/favo
 
 export type ProductDocument = {
   _id: string;
+  productApiId: number;
   title: string;
   price: number;
   image: string;
@@ -20,7 +21,7 @@ export type FavoriteListDocument = {
   title: string;
   description: string;
   userId: string;
-  products?: ProductDocument[];
+  products: ProductDocument[];
 };
 
 @Injectable()
@@ -42,6 +43,7 @@ export class MongoDbFavoriteListRepository implements FavoriteListRepository {
         title: favoriteList.title,
         description: favoriteList.description,
         userId: favoriteList.userId.toString(),
+        products: []
       });
     } catch (error) {
       throw error;
@@ -74,9 +76,10 @@ export class MongoDbFavoriteListRepository implements FavoriteListRepository {
           title: favoriteList.title,
           description: favoriteList.description,
           userId: favoriteList.userId,
-          products: favoriteList.products?.map((product) => {
+          products: favoriteList.products.map((product) => {
             return Product.restore(
               {
+                productApiId: product.productApiId,
                 title: product.title,
                 price: product.price,
                 image: product.image,
@@ -143,17 +146,18 @@ export class MongoDbFavoriteListRepository implements FavoriteListRepository {
     }
   }
 
-  async favoriteProdcut(entity: FavoriteList): Promise<void> {
+  async favoriteProduct(favoriteListId: UniqueEntityID, products: Product[]): Promise<void> {
     try {
       await this.#favoriteListCollection.updateOne(
         {
-          _id: entity.id.toValue(),
+          _id: favoriteListId.toValue(),
         },
         {
           $set: {
-            products: entity.products.map((product) => {
+            ...products.map((product) => {
               return {
                 _id: product.id.toValue(),
+                productApiId: product.productApiId,
                 title: product.title,
                 price: product.price,
                 image: product.image,
@@ -165,21 +169,24 @@ export class MongoDbFavoriteListRepository implements FavoriteListRepository {
         },
       );
     } catch (error) {
+      console.log('error', error);
+      
       throw error;
     }
   }
 
-  async unfavoriteProduct(entity: FavoriteList): Promise<void> {
+  async unfavoriteProduct(entityId: UniqueEntityID, products: Product[]): Promise<void> {
     try {
       await this.#favoriteListCollection.updateOne(
         {
-          _id: entity.id.toValue(),
+          _id: entityId.toValue(),
         },
         {
           $set: {
-            products: entity.products.map((product) => {
+            ...products.map((product) => {
               return {
                 _id: product.id.toValue(),
+                productApiId: product.productApiId,
                 title: product.title,
                 price: product.price,
                 image: product.image,
