@@ -10,9 +10,10 @@ import { FavoriteProductUseCase } from 'src/domain/application/use-cases/favorit
 import { UnFavoriteProductUseCase } from 'src/domain/application/use-cases/favorite-list/unfavorite-product';
 import { FavoriteListController } from './controllers/favorite-list.controller';
 import { CustomerController } from './controllers/customer.controller';
+import { CryptographyModule } from '../cryptography/cryptography.module';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, CryptographyModule],
   controllers: [FavoriteListController, CustomerController],
   providers: [
     CreateFavoriteListUseCase,

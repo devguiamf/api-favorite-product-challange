@@ -15,7 +15,9 @@ export type RegisterCustomerResponse = void;
 
 @Injectable()
 export class RegisterCustomerUseCase implements UseCase<RegisterCustomerRequest, RegisterCustomerResponse> {
-  constructor(private readonly customerRepo: CustomerRepository) {}
+  constructor(
+    private readonly customerRepo: CustomerRepository
+  ) {}
 
   async execute(
     request: RegisterCustomerRequest,
@@ -28,11 +30,13 @@ export class RegisterCustomerUseCase implements UseCase<RegisterCustomerRequest,
         throw new EmailIsAlreadyExistError();
       } 
 
+      const hashPassword = ''
+
       await this.customerRepo.save(
         Customer.create({
           email: request.email,
           name: request.name,
-          password: request.password
+          password: hashPassword
         })
       );
     } catch (error) {

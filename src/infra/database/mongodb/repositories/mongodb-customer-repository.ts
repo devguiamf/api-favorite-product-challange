@@ -78,5 +78,26 @@ export class MongoDbCustomerRepository implements CustomerRepository {
       throw error;
     }
   }
+
+  async findById(id: UniqueEntityID): Promise<Customer | null> {
+    try {
+      const user = await this.#customerCollection
+        .findOne({
+          _id: id.toValue(),
+        });
+
+      if (!user) {
+        return null;
+      }
+
+      return Customer.restore({
+        email: Email.create(user.email),
+        name: user.name,
+      }, new UniqueEntityID(user._id));
+
+    } catch (error: any) {
+      throw error;
+    }
+  }
  
 }

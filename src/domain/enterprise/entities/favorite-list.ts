@@ -1,7 +1,7 @@
 
 import { Entity } from 'src/core/entity/entity';
 import { UniqueEntityID } from 'src/core/entity/unique-entity-id';
-import { Product, ProductProps } from './product';
+import { Product } from './product';
 import { FavoriteListIsFullError } from './errors/favorite-list-is-full.error';
 import { ProductAlreadyFavoritedError } from './errors/product-already-favorited-error';
 

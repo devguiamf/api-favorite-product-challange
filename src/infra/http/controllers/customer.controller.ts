@@ -7,7 +7,9 @@ import { Customer } from 'src/domain/enterprise/entities/customer';
 import { RegisterCustomerSchema, TRegisterCustomerSchema } from './schema/customer/register-customer.schema';
 import { AuthCustomerSchema, TAuthCustomerSchema } from './schema/customer/auth-customer.schema';
 import { CustomerHttpResponse, CustomerPresenter } from './presenters/customer.presenter';
+import { Public } from 'src/infra/auth/public.decorator';
 
+@Public()
 @Controller('client')
 export class CustomerController {
   constructor(
@@ -21,17 +23,15 @@ export class CustomerController {
     body: TAuthCustomerSchema,
   ): Promise<CustomerHttpResponse> {
     try {
-      const customer = await this.authCustomerUseCase.execute({
+      const {user, token} = await this.authCustomerUseCase.execute({
         email: Email.create(body.email),
         password: body.password,
       });
 
       const customerRestore = Customer.restore({
-        name: customer.user.name,
-        email: Email.create(customer.user.email),
-      }, customer.user.id);
-
-      const token = 'token';
+        name: user.name,
+        email: Email.create(user.email),
+      }, user.id);
 
       return CustomerPresenter.toHTTP(customerRestore, token);
     } catch (error) {
