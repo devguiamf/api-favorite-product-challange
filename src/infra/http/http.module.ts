@@ -8,10 +8,12 @@ import { AuthCustomerUseCase } from 'src/domain/application/use-cases/customer/a
 import { RegisterCustomerUseCase } from 'src/domain/application/use-cases/customer/register-customer';
 import { FavoriteProductUseCase } from 'src/domain/application/use-cases/favorite-list/favorite-product';
 import { UnFavoriteProductUseCase } from 'src/domain/application/use-cases/favorite-list/unfavorite-product';
+import { FavoriteListController } from './controllers/favorite-list.controller';
+import { CustomerController } from './controllers/customer.controller';
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [],
+  controllers: [FavoriteListController, CustomerController],
   providers: [
     CreateFavoriteListUseCase,
     GetFavoriteListByIdUseCase,
