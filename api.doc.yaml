@@ -1,0 +1,333 @@
+openapi: 3.0.0
+info:
+  title: Client and Favorites Management API
+  description: API for client registration, management of favorite product lists, and login.
+  version: 1.0.0
+tags:
+  - name: Clients
+    description: Endpoints related to client registration ans authenticate.
+  - name: Favorite Lists
+    description: Endpoints to manage favorite product lists.
+paths:
+  /clients/register:
+    post:
+      tags:
+        - Clients
+      summary: Register Client
+      description: Allows the registration of new clients.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Client's name.
+                email:
+                  type: string
+                  description: Client's email address.
+                password:
+                  type: string
+                  description: Client's password.
+              required:
+                - name
+                - email
+                - password
+      responses:
+        '204':
+          description: Client successfully registered.
+        '409':
+          description: Email already registered.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                  detail:
+                    type: string
+                  error:
+                    type: string
+
+  /clients/auth:
+    post:
+      tags:
+        - Clients
+      summary: Client Login
+      description: Allows clients to log in using their registered email and password.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Login successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: Authentication token.
+                  user:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      email:
+                        type: string
+        '401':
+          description: Invalid login credentials.
+
+  /favorite-lists:
+    post:
+      tags:
+        - Favorite Lists
+      summary: Create Favorite Product List
+      description: Creates a favorite product list for the client.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                userId:
+                  type: string
+              required:
+                - title
+                - userId
+      responses:
+        '204':
+          description: Favorite list successfully created.
+        '409':
+          description: The client already has a favorite list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                  detail:
+                    type: string
+                  error:
+                    type: string
+                    
+  /favorite-lists/{userId}:
+        
+    get:
+      tags:
+        - Favorite Lists
+      summary: View Favorite Product List
+      description: Returns the client's favorite product list.
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+          description: The ID of the user.
+      responses:
+        '200':
+          description: Favorite list successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        title:
+                          type: string
+                        image:
+                          type: string
+                        category:
+                          type: string
+                        price:
+                          type: number
+                        description:
+                          type: string
+        '404':
+          description: Favorite list successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                  detail:
+                    type: string
+                  error:
+                    type: string
+    patch:
+      tags:
+        - Favorite Lists
+      summary: Edit Favorite Product List
+      description: Allows editing the client's favorite product list.
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+          description: The ID of the user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+              required:
+                - title
+                - description
+      responses:
+        '200':
+          description: Favorite list successfully updated.
+        '400':
+          description: Error updating list missing data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                  error:
+                    type: string
+          
+    delete:
+      tags:
+        - Favorite Lists
+      summary: Delete Favorite Product List
+      description: Deletes the client's favorite product list. All products will be unfavored.
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+          description: The ID of the user.
+      responses:
+        '204':
+          description: Favorite list successfully deleted.
+        '404':
+          description: Error when deleting non-existent user.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /favorite-lists/{userId}/favorite-product:
+    post:
+      tags:
+        - Favorite Lists
+      summary: Add Product to Favorite List
+      description: Adds a product to the client's favorite list.
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+          description: The ID of the user.
+        - in: query
+          name: productId
+          required: true
+          schema:
+            type: string
+          description: The ID of the product to be favorited.
+      responses:
+        '200':
+          description: Product successfully added to favorite list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Produto favoritado com sucesso."
+        '404':
+          description: Favorite list or product not found.
+        '400':
+          description: Invalid data or bad request.
+
+  /favorite-lists/{productId}/unfavorite-product:
+    post:
+      tags:
+        - Favorite Lists
+      summary: Remove Product from Favorite List
+      description: Removes a product from the client's favorite list.
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+          description: The ID of the product.
+      responses:
+        '200':
+          description: Product successfully removed from favorite list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Produto desfavoritado com sucesso."
+        '404':
+          description: Favorite list or product not found.
+        '400':
+          description: Invalid data or bad request.
