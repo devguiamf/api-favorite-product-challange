@@ -12,7 +12,28 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=8000
-      - MONGO_URI=mongodb+srv://guilabs:a7k4f8atx@favorite-products.ddbkg.mongodb.net/?retryWrites=true&w=majority&appName=favorite-products
+      - MONGO_URI=mongodb://root:root@mongodb:27017
     ports:
       - 8000:8000
+    networks:
+    - nest
+    depends_on:
+      - mongodb
     command: npm run start:dev
+    
+  mongodb:
+      container_name: mongodb
+      image: mongo
+      volumes:
+        - .mongodb:/data/db
+      ports:
+        - 27017:27017
+      networks:
+        - nest
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: root
+      command: mongod --auth
+networks:
+    nest:
+      driver: bridge

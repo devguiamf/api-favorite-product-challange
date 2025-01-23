@@ -32,6 +32,8 @@ export class UnFavoriteProductUseCase
         new UniqueEntityID(request.userId),
       );
 
+      if(!favoriteList) throw new FavoriteListNotFoundError();
+
       favoriteList.unfavoriteProduct(request.productId, favoriteList.products);
 
       await this.favoriteListRepo.unfavoriteProduct(favoriteList);

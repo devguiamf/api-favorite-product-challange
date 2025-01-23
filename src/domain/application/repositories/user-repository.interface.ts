@@ -6,6 +6,6 @@ import { Email } from 'src/domain/enterprise/entities/value-objects/email';
 export abstract class UserRepository implements Repository<User> {
   abstract save(entity: User): Promise<void>;
   abstract existsByEmail(email: Email): Promise<boolean>;
-  abstract findByEmail(email: Email): Promise<User>;
+  abstract findByEmail(email: Email): Promise<User | null>;
   abstract findById(id: UniqueEntityID): Promise<User | null>;
 }

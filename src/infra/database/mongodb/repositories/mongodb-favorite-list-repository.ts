@@ -50,7 +50,7 @@ export class MongoDbFavoriteListRepository implements FavoriteListRepository {
     }
   }
 
-  async findById(userId: UniqueEntityID): Promise<FavoriteList> {
+  async findById(userId: UniqueEntityID): Promise<FavoriteList | null> {
     try {
       let favoriteList = await this.#favoriteListCollection.findOne(
         {
@@ -68,7 +68,7 @@ export class MongoDbFavoriteListRepository implements FavoriteListRepository {
       );
 
       if (!favoriteList) {
-        return null as unknown as FavoriteList;
+        return null
       }
 
       return FavoriteList.restore(

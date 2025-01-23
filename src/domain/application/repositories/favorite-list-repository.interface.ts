@@ -10,7 +10,7 @@ export abstract class FavoriteListRepository
 {
   abstract save(entity: FavoriteList): Promise<void>;
   abstract exists(id: UniqueEntityID): Promise<boolean>;
-  abstract findById(id: UniqueEntityID): Promise<FavoriteList>;
+  abstract findById(id: UniqueEntityID): Promise<FavoriteList | null>;
   abstract delete(id: UniqueEntityID): Promise<void>;
   abstract update(entity: FavoriteList): Promise<void>;
   abstract favoriteProduct(entity: FavoriteList): Promise<void>;

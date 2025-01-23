@@ -34,6 +34,8 @@ export class FavoriteProductUseCase
         new UniqueEntityID(request.userId),
       );
 
+      if(!favoriteList) throw new FavoriteListNotFoundError();
+
       if(favoriteList.products.length >=5){
         throw new FavoriteListIsFullError(favoriteList);
       }

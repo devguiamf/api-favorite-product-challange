@@ -32,6 +32,8 @@ export class UpdateFavoriteListUseCase
 
       const favoriteList = await this.favoriteListRepo.findById(entityId);
 
+      if(!favoriteList) throw new EntityNotFoundError('Favorite list', userId);
+
       Object.assign(favoriteList, restOfData);
 
       await this.favoriteListRepo.update(favoriteList);

@@ -53,14 +53,14 @@ export class MongoDbUserRepository implements UserRepository {
     }
   }
 
-  async findByEmail(email: Email): Promise<User> {
+  async findByEmail(email: Email): Promise<User | null> {
     try {
       const user = await this.#userCollection.findOne({
         email: email.value,
       });
 
       if (!user) {
-        return null as unknown as User;
+        return null
       }
 
       return User.restore(
