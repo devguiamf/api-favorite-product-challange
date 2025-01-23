@@ -24,7 +24,8 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       return true;
     }
 
-    const canActivate = await super.canActivate(context);
+    let canActivate = await super.canActivate(context);
+
 
     const { user } = request;
 

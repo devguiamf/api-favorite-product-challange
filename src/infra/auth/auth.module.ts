@@ -7,7 +7,7 @@ import { EnvService } from '../env/env.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { JwtStrategy } from './jwt.strategy';
 import { DatabaseModule } from '../database/database.module';
-import { GetCustomerUseCase } from 'src/domain/application/use-cases/customer/get-customer';
+import { GetUserUseCase } from 'src/domain/application/use-cases/customer/get-user';
 
 @Module({
   imports: [
@@ -20,14 +20,13 @@ import { GetCustomerUseCase } from 'src/domain/application/use-cases/customer/ge
       useFactory(env: EnvService) {
         const jwt_secret = env.get('JWT_SECRET');
         return {
-          signOptions: { algorithm: 'RS256' },
           secret: jwt_secret,
         };
       },
     }),
   ],
   providers: [
-    GetCustomerUseCase,
+    GetUserUseCase,
     JwtStrategy,
     EnvService,
     {

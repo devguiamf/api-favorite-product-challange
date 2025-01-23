@@ -1,6 +1,6 @@
-import { Customer } from 'src/domain/enterprise/entities/customer';
+import { User } from "src/domain/enterprise/entities/customer";
 
-export type CustomerHttpResponse = {
+export type UserHttpResponse = {
   token: string;
   user: {
     id: string;
@@ -9,14 +9,14 @@ export type CustomerHttpResponse = {
   };
 };
 
-export class CustomerPresenter {
-  static toHTTP(customer: Customer, token: string): CustomerHttpResponse {
+export class UserPresenter {
+  static toHTTP(user: User, token: string): UserHttpResponse {
     return {
       token: token,
       user: {
-        id: customer.id.toValue(),
-        name: customer.name,
-        email: customer.email,
+        id: user.id.toValue(),
+        name: user.name,
+        email: user.email,
       },
     };
   }

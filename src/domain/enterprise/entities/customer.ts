@@ -2,24 +2,19 @@ import { Entity } from 'src/core/entity/entity';
 import { UniqueEntityID } from 'src/core/entity/unique-entity-id';
 import { Email } from './value-objects/email';
 
-export type CustomerProps = {
+export type UserProps = {
   name: string;
   email: Email;
   password?: string;
 };
 
-export type CustomerWithPasswordOmit = Omit<CustomerProps, 'password'>;
-
-export class Customer extends Entity<CustomerProps> {
-  public static create(props: CustomerProps): Customer {
-    return new Customer(props);
+export class User extends Entity<UserProps> {
+  public static create(props: UserProps): User {
+    return new User(props);
   }
 
-  public static restore(
-    props: CustomerWithPasswordOmit,
-    id: UniqueEntityID,
-  ): Customer {
-    return new Customer(props, id);
+  public static restore(props: UserProps, id: UniqueEntityID): User {
+    return new User(props, id);
   }
 
   get name(): string {

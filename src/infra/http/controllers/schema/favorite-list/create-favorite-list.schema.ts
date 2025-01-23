@@ -9,7 +9,7 @@ export const CreateFavoriteListSchema = z.object({
     message: 'Usuário é obrigatório!',
   }),
 
-  descritpion: z.string().optional().default(''),
+  description: z.string().optional().default(''),
 });
 
 export type TCreateFavoriteListSchema = z.infer<typeof CreateFavoriteListSchema>;

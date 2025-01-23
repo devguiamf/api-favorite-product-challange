@@ -22,9 +22,6 @@ export class GetFavoriteListByIdUseCase {
 
       const favoriteList = await this.favoriteListRepo.findById(entityId);
 
-      console.log('favoriteList', favoriteList);
-      
-
       if (!favoriteList) {
         throw new EntityNotFoundError(
           'FavoriteList',

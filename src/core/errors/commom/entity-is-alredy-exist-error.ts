@@ -6,7 +6,7 @@ export class EntityIsIsAlreadyExistError extends BaseError {
     super({
       message: `Recurso ja existe!`,
       code: HttpStatus.CONFLICT,
-      details: `A entidade ${entity} ${id && `- ${id}`} se encontra ja cadastrada`,
+      details: `A entidade ${entity} se encontra ja cadastrada`,
     });
   }
 }

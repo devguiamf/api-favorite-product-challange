@@ -7,7 +7,12 @@ export type FavoriteListHttpResponse = {
   title: string;
   description: string;
   userId: string;
-  products: Product[];
+  products: {
+    title: string;
+    price: number;
+    image: string;
+    productApiId: number;
+  }[];
 };
 
 export class FavoriteListPresenter {
@@ -17,7 +22,14 @@ export class FavoriteListPresenter {
       title: favoriteList.title,
       description: favoriteList.description,
       userId: favoriteList.userId.toString(),
-      products: favoriteList.products,
-    };
+      products: favoriteList.products.map((product) => {
+        return {
+          title: product.title,
+          price: product.price,
+          image: product.image,
+          productApiId: product.productApiId
+        };
+      })
+    };   
   }
 }

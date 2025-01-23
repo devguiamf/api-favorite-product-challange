@@ -1,11 +1,12 @@
 
+import { HttpStatus } from '@nestjs/common';
 import { BaseError } from 'src/core/errors/base-error';
-import { Product } from '../product';
 
 export class ProductAlreadyFavoritedError extends BaseError {
-  constructor(product: Product) {
+  constructor() {
     super({
-      message: `Produto ${product.title} (${product.id.toString()}) já foi favoritado`,
+      message: `Este produto já esta na sua lista de favoritado`,
+      code: HttpStatus.CONFLICT,
     });
   }
 }

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const RegisterCustomerSchema = z.object({
+export const RegisterUserSchema = z.object({
   name: z.string({
     message: 'Nome do cliente é obrigatório!',
   }),
@@ -17,4 +17,4 @@ export const RegisterCustomerSchema = z.object({
   }),
 });
 
-export type TRegisterCustomerSchema = z.infer<typeof RegisterCustomerSchema>;
+export type TRegisterUserSchema = z.infer<typeof RegisterUserSchema>;

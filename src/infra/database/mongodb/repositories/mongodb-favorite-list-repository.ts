@@ -3,7 +3,7 @@ import { Collection, MongoClient } from 'mongodb';
 import { MONGO_DB_CONNECTION } from '../mongodb-connection';
 import { UniqueEntityID } from 'src/core/entity/unique-entity-id';
 import { FavoriteList } from 'src/domain/enterprise/entities/favorite-list';
-import { Product } from 'src/domain/enterprise/entities/product';
+import { Product, ProductProps } from 'src/domain/enterprise/entities/product';
 import { FavoriteListRepository } from 'src/domain/application/repositories/favorite-list-repository.interface';
 
 export type ProductDocument = {
@@ -146,15 +146,15 @@ export class MongoDbFavoriteListRepository implements FavoriteListRepository {
     }
   }
 
-  async favoriteProduct(favoriteListId: UniqueEntityID, products: Product[]): Promise<void> {
+  async favoriteProduct(favoriteList: FavoriteList): Promise<void> {
     try {
       await this.#favoriteListCollection.updateOne(
         {
-          _id: favoriteListId.toValue(),
+          _id: favoriteList.id.toValue(),
         },
         {
           $set: {
-            ...products.map((product) => {
+            products: favoriteList.products.map((product) => {
               return {
                 _id: product.id.toValue(),
                 productApiId: product.productApiId,
@@ -166,24 +166,22 @@ export class MongoDbFavoriteListRepository implements FavoriteListRepository {
               };
             }),
           },
-        },
+        }
       );
     } catch (error) {
-      console.log('error', error);
-      
       throw error;
     }
   }
 
-  async unfavoriteProduct(entityId: UniqueEntityID, products: Product[]): Promise<void> {
+  async unfavoriteProduct(entity: FavoriteList): Promise<void> {
     try {
       await this.#favoriteListCollection.updateOne(
         {
-          _id: entityId.toValue(),
+          _id: entity.id.toValue(),
         },
         {
           $set: {
-            ...products.map((product) => {
+            products: entity.products.map((product) => {
               return {
                 _id: product.id.toValue(),
                 productApiId: product.productApiId,

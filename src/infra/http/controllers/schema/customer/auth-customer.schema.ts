@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const AuthCustomerSchema = z.object({
+export const AuthUserSchema = z.object({
   email: z
     .string({
       message: 'E-mail do cliente é obrigatório!',
@@ -14,4 +14,4 @@ export const AuthCustomerSchema = z.object({
   }),
 });
 
-export type TAuthCustomerSchema = z.infer<typeof AuthCustomerSchema>;
+export type TAuthUserSchema = z.infer<typeof AuthUserSchema>;

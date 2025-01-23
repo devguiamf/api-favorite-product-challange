@@ -1,26 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { UseCase } from 'src/core/types/use-case';
-import { Customer } from 'src/domain/enterprise/entities/customer';
-import { CustomerRepository } from '../../repositories/customer-repository.interface';
 import { UniqueEntityID } from 'src/core/entity/unique-entity-id';
 import { EntityNotFoundError } from 'src/core/errors/commom/entity-not-found-error';
+import { User } from 'src/domain/enterprise/entities/customer';
+import { UserRepository } from '../../repositories/user-repository.interface';
 
-export type GetCustomerRequest = {
+export type GetUserRequest = {
   userId: string;
 };
 
-export type GetCustomerResponse = Customer;
+export type GetUserResponse = User;
 
 @Injectable()
-export class GetCustomerUseCase
-  implements UseCase<GetCustomerRequest, GetCustomerResponse>
+export class GetUserUseCase
+  implements UseCase<GetUserRequest, GetUserResponse>
 {
-  constructor(
-    private readonly userRepository: CustomerRepository
-  ) {}
+  constructor(private readonly userRepository: UserRepository) {}
 
-  async execute(request: GetCustomerRequest): Promise<GetCustomerResponse> {
-
+  async execute(request: GetUserRequest): Promise<GetUserResponse> {
     const user = await this.userRepository.findById(
       new UniqueEntityID(request.userId),
     );

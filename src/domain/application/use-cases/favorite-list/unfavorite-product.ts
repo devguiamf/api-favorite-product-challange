@@ -3,6 +3,7 @@ import { UseCase } from 'src/core/types/use-case';
 import { UniqueEntityID } from 'src/core/entity/unique-entity-id';
 import { FavoriteListNotFoundError } from './errors/favorite-list-not-found';
 import { FavoriteListRepository } from '../../repositories/favorite-list-repository.interface';
+import { Product } from 'src/domain/enterprise/entities/product';
 
 export type UnFavoriteProductRequest = {
   userId: string;
@@ -33,7 +34,7 @@ export class UnFavoriteProductUseCase
 
       favoriteList.unfavoriteProduct(request.productId, favoriteList.products);
 
-      await this.favoriteListRepo.unfavoriteProduct(favoriteList.id, favoriteList.products);
+      await this.favoriteListRepo.unfavoriteProduct(favoriteList);
     } catch (error) {
       throw error;
     }

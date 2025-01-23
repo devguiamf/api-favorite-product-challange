@@ -44,7 +44,7 @@ export class FavoriteListController {
     private readonly createFavoriteListUseCase: CreateFavoriteListUseCase,
     private readonly GetFavoriteListByIdUseCase: GetFavoriteListByIdUseCase,
     private readonly updateFavoriteListUseCase: UpdateFavoriteListUseCase,
-    private readonly deleteCustomerUseCase: DeleteFavoriteListUseCase,
+    private readonly deleteUserUseCase: DeleteFavoriteListUseCase,
     private readonly favoriteProductUseCase: FavoriteProductUseCase,
     private readonly unfavoriteProductUseCase: UnFavoriteProductUseCase,
   ) {}
@@ -54,12 +54,12 @@ export class FavoriteListController {
     @Param('id') id: string,
   ): Promise<FavoriteListHttpResponse> {
     try {
-
       const favoriteList = await this.GetFavoriteListByIdUseCase.execute({
         userId: id,
       });
 
-      return FavoriteListPresenter.toHTTP(favoriteList);
+      const favorite = FavoriteListPresenter.toHTTP(favoriteList);
+      return favorite;
     } catch (error) {
       throw error;
     }
@@ -67,7 +67,7 @@ export class FavoriteListController {
 
   @Patch(':userId')
   @HttpCode(204)
-  async updateCustomer(
+  async updateUser(
     @Body(new ZodValidationPipe(UpdateFavoriteListSchema))
     body: TUpdateFavoriteListSchema,
     @Param('userId') userId: string,
@@ -87,9 +87,9 @@ export class FavoriteListController {
 
   @Delete(':userId')
   @HttpCode(204)
-  async deleteCustomer(@Param('userId') userId: string): Promise<void> {
+  async deleteUser(@Param('userId') userId: string): Promise<void> {
     try {
-      await this.deleteCustomerUseCase.execute({
+      await this.deleteUserUseCase.execute({
         userId,
       });
     } catch (error) {
@@ -106,7 +106,7 @@ export class FavoriteListController {
     try {
       await this.createFavoriteListUseCase.execute({
         title: body.title,
-        description: body.descritpion,
+        description: body.description,
         userId: body.userId,
       });
     } catch (error) {
@@ -115,6 +115,7 @@ export class FavoriteListController {
   }
 
   @Post(':userId/favorite-product')
+  @HttpCode(204)
   async favoriteProduct(
     @Body(new ZodValidationPipe(FavoriteProductSchema))
     body: TFavoriteProductSchema,
@@ -132,16 +133,15 @@ export class FavoriteListController {
             category: body.category,
             description: body.description,
           },
-          new UniqueEntityID()
+          new UniqueEntityID(),
         ),
       });
     } catch (error) {
-      console.log('error', error);
       throw error;
     }
   }
 
-  @Patch(':userId/unfavorite-product')
+  @Post(':userId/unfavorite-product')
   @HttpCode(204)
   async unFavoriteProduct(
     @Body(new ZodValidationPipe(UnFavoriteProductSchema))
@@ -151,7 +151,7 @@ export class FavoriteListController {
     try {
       await this.unfavoriteProductUseCase.execute({
         userId: userId,
-        productId: body.productId,
+        productId: body.productApiId,
       });
     } catch (error) {
       throw error;

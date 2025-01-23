@@ -4,6 +4,8 @@ import { UniqueEntityID } from 'src/core/entity/unique-entity-id';
 import { Product } from 'src/domain/enterprise/entities/product';
 import { FavoriteListNotFoundError } from './errors/favorite-list-not-found';
 import { FavoriteListRepository } from '../../repositories/favorite-list-repository.interface';
+import { FavoriteListIsFullError } from 'src/domain/enterprise/entities/errors/favorite-list-is-full.error';
+import { ProductAlreadyFavoritedError } from 'src/domain/enterprise/entities/errors/product-already-favorited-error';
 
 export type FavoriteProductRequest = {
   userId: string;
@@ -32,9 +34,21 @@ export class FavoriteProductUseCase
         new UniqueEntityID(request.userId),
       );
 
+      if(favoriteList.products.length >=5){
+        throw new FavoriteListIsFullError(favoriteList);
+      }
+
+      const productExists = favoriteList.products.find(
+        (product) => product.productApiId === request.product.productApiId,
+      );
+
+      if (productExists) {
+        throw new ProductAlreadyFavoritedError();
+      }
+
       favoriteList.favoriteProduct(request.product, favoriteList);
 
-      await this.favoriteListRepo.favoriteProduct(favoriteList.id, favoriteList.products);
+      await this.favoriteListRepo.favoriteProduct(favoriteList);
     } catch (error) {
       throw error;
     }

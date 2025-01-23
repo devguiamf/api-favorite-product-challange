@@ -18,6 +18,7 @@ export class JwtEncrypter implements Encrypter {
       ...(options?.expiresIn && {
         expiresIn: this.msToSeconds(options.expiresIn),
       }),
+      secret: this.env.get('JWT_SECRET')
     });
   }
 
@@ -29,8 +30,7 @@ export class JwtEncrypter implements Encrypter {
     const secret = this.env.get('JWT_SECRET');
 
     return (await this.jwtService.verifyAsync(token, {
-      algorithms: ['RS256'],
-      secret: Buffer.from(secret, 'base64'),
+      secret: secret
     })) as T;
   }
 }

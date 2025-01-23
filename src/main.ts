@@ -8,9 +8,12 @@ async function bootstrap() {
   app.useGlobalFilters(new DefaultExceptionFilter());
 
   app.enableCors({
-    origin: '*',
+    origin: '*', // Origem específica do Angular
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'], // Métodos permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'], // Headers permitidos
+    credentials: true, // Se necessário, para cookies e autenticação
   });
-  
+
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

@@ -40,8 +40,6 @@ export class CreateFavoriteListUseCase
 
       return favoriteList;
     } catch (error) {
-      console.log('error', error);
-      
       throw error;
     }
   }

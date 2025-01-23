@@ -1,9 +1,10 @@
 
 import { Entity } from 'src/core/entity/entity';
 import { UniqueEntityID } from 'src/core/entity/unique-entity-id';
-import { Product } from './product';
+import { Product, ProductProps } from './product';
 import { FavoriteListIsFullError } from './errors/favorite-list-is-full.error';
 import { ProductAlreadyFavoritedError } from './errors/product-already-favorited-error';
+import { EntityNotFoundError } from 'src/core/errors/commom/entity-not-found-error';
 
 
 export type FavoriteListProps = {
@@ -19,78 +20,65 @@ export class FavoriteList extends Entity<FavoriteListProps> {
   favoriteProduct(newProduct: Product, favoritList: FavoriteList) {
 
     if(favoritList.products.length >= 5) {
-      new FavoriteListIsFullError(this);
-    }
-    
-    if(favoritList.products.length === 0){
-      this.props.products.push(newProduct);
+      throw new FavoriteListIsFullError(this);
     }
 
-    else{
-      favoritList.products.forEach((product) => {
-        const productAlreadyFavorited = this.props.products.some(
-          (favoritedProduct) => favoritedProduct.id.equals(newProduct.id),
-        );
-  
-        if (productAlreadyFavorited) {
-          throw new ProductAlreadyFavoritedError(product);
-        }
-  
-        this.props.products.push(product);
-      });
-    }    
+    const productsAlreadyFavorited = this.props.products.some((product) => product.productApiId === newProduct.productApiId);
+
+    if (productsAlreadyFavorited) {
+      throw new ProductAlreadyFavoritedError();
+    }
+
+    this.props.products.push(newProduct);
   }
 
   unfavoriteProduct(productApiId: number, productLsit: Product[]) {
-    productLsit.forEach((product) => {
-      const productAlreadyFavorited = this.#newFavoritedProducts.some(
-        (favoritedProduct) => favoritedProduct.productApiId === productApiId,
-      );
 
-      if (!productAlreadyFavorited) {
-        throw new ProductAlreadyFavoritedError(product);
-      }
+    const productExists = productLsit.find((product) => product.productApiId === productApiId);
 
-      this.#newFavoritedProducts.push(product);
+    if (!productExists) {
+      throw new EntityNotFoundError('Product', productApiId.toString(), 'Produto não encontrado');
+    }
 
-      this.props.products = this.#newFavoritedProducts;
-    });
-  }
+    const productIndex = productLsit.findIndex((product) => product.productApiId === productApiId);
 
-  set title(value: string) {
-    this.props.title = value;
+    productLsit.splice(productIndex, 1);
   }
 
   get title() {
     return this.props.title;
   }
 
-  set description(value: string) {
-    this.props.description = value;
+  set title(value: string) {
+    this.props.title = value;
   }
 
   get description() {
     return this.props.description ?? '';
   }
 
-  set userId(value: string) {
-    this.props.userId = value;
+  set description(value: string) {
+    this.props.description = value;
   }
 
   get userId() {
     return this.props.userId;
   }
 
-  set products(value: Product[]) {
-    this.props.products = value;
+  set userId(value: string) {
+    this.props.userId = value;
   }
 
   get products(): Product[] {
     return this.props.products ?? [];
   }
 
-  get ProductPros() {
-    return this.props;
+  set products(value: Product[]) {
+    this.props.products = value;
+  }
+
+  get ProductPros(): ProductProps[] {
+    return this.props.products.map((product) => product.toProps());
   }
 
   public static create(props: FavoriteListProps) {

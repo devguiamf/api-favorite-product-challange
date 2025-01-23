@@ -1,57 +1,59 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ZodValidationPipe } from '../pipes/zod-validation.pipe';
-import { AuthCustomerUseCase } from 'src/domain/application/use-cases/customer/auth-customer';
-import { Email } from 'src/domain/enterprise/entities/value-objects/email';
-import { RegisterCustomerUseCase } from 'src/domain/application/use-cases/customer/register-customer';
-import { Customer } from 'src/domain/enterprise/entities/customer';
-import { RegisterCustomerSchema, TRegisterCustomerSchema } from './schema/customer/register-customer.schema';
-import { AuthCustomerSchema, TAuthCustomerSchema } from './schema/customer/auth-customer.schema';
-import { CustomerHttpResponse, CustomerPresenter } from './presenters/customer.presenter';
 import { Public } from 'src/infra/auth/public.decorator';
+import { AuthUserUseCase } from 'src/domain/application/use-cases/customer/auth-user';
+import { RegisterUserUseCase } from 'src/domain/application/use-cases/customer/register-user';
+import { AuthUserSchema, TAuthUserSchema } from './schema/customer/auth-customer.schema';
+import { UserHttpResponse, UserPresenter } from './presenters/customer.presenter';
+import { Email } from 'src/domain/enterprise/entities/value-objects/email';
+import { User } from 'src/domain/enterprise/entities/customer';
+import { RegisterUserSchema, TRegisterUserSchema } from './schema/customer/register-customer.schema';
 
 @Public()
 @Controller('client')
-export class CustomerController {
+export class UserController {
   constructor(
-    private readonly authCustomerUseCase: AuthCustomerUseCase,
-    private readonly registerCustomerUseCase: RegisterCustomerUseCase
+    private readonly authUserUseCase: AuthUserUseCase,
+    private readonly registerUserUseCase: RegisterUserUseCase,
   ) {}
 
   @Post('auth')
-  async authenticateCustomer(
-    @Body(new ZodValidationPipe(AuthCustomerSchema))
-    body: TAuthCustomerSchema,
-  ): Promise<CustomerHttpResponse> {
+  async authenticateUser(
+    @Body(new ZodValidationPipe(AuthUserSchema))
+    body: TAuthUserSchema,
+  ): Promise<UserHttpResponse> {
     try {
-      const {user, token} = await this.authCustomerUseCase.execute({
+      const { user, token } = await this.authUserUseCase.execute({
         email: Email.create(body.email),
         password: body.password,
       });
 
-      const customerRestore = Customer.restore({
-        name: user.name,
-        email: Email.create(user.email),
-      }, user.id);
+      const userRestore = User.restore(
+        {
+          name: user.name,
+          email: Email.create(user.email),
+        },
+        user.id,
+      );
 
-      return CustomerPresenter.toHTTP(customerRestore, token);
+      return UserPresenter.toHTTP(userRestore, token);
     } catch (error) {
       throw error;
     }
   }
 
   @Post('register')
-  async registerCustomer(
-    @Body(new ZodValidationPipe(RegisterCustomerSchema))
-    body: TRegisterCustomerSchema,
-  ): Promise<string> {
+  @HttpCode(201)
+  async registerUser(
+    @Body(new ZodValidationPipe(RegisterUserSchema))
+    body: TRegisterUserSchema,
+  ): Promise<void> {
     try {
-      await this.registerCustomerUseCase.execute({
+      await this.registerUserUseCase.execute({
         email: Email.create(body.email),
         password: body.password,
         name: body.name,
       });
-
-      return "Cadastro realizado com sucesso";
     } catch (error) {
       throw error;
     }

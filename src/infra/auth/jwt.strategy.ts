@@ -6,7 +6,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ParsedQs } from 'qs';
 import { z } from 'zod';
 import { EnvService } from '../env/env.service';
-import { GetCustomerUseCase } from 'src/domain/application/use-cases/customer/get-customer';
+import { GetUserUseCase } from 'src/domain/application/use-cases/customer/get-user';
 
 const tokenPayloadSchema = z.object({
   sub: z.string().uuid(),
@@ -21,14 +21,13 @@ export type UserPayload = z.infer<typeof tokenPayloadSchema> & {
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(
     config: EnvService,
-    private readonly getUser: GetCustomerUseCase
+    private readonly getUser: GetUserUseCase,
   ) {
     const secret = config.get('JWT_SECRET');
 
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: Buffer.from(secret, 'base64'),
-      algorithms: ['RS256'],
+      secretOrKey: secret,
     });
   }
 
