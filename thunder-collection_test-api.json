@@ -1,0 +1,176 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "test-api",
+    "collectionId": "5906f20e-1525-496a-9190-5f47a954002b",
+    "dateExported": "2025-01-23T08:31:38.049Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "6bf1e0ef-12ae-486b-bef9-444fcc3a1669",
+            "name": "customer",
+            "containerId": "",
+            "created": "2025-01-22T15:55:43.012Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "59853319-d0f1-4e7b-a1bb-530d504b8058",
+            "name": "favorite-list",
+            "containerId": "",
+            "created": "2025-01-22T16:05:55.548Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "ceab6594-ee1c-4b81-bfdf-1e9f87e0494f",
+            "colId": "5906f20e-1525-496a-9190-5f47a954002b",
+            "containerId": "6bf1e0ef-12ae-486b-bef9-444fcc3a1669",
+            "name": "auth",
+            "url": "http://localhost:8000/client/auth",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2025-01-22T15:55:49.736Z",
+            "modified": "2025-01-22T22:46:20.402Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"guilherme.amf187@gmail.com\",\n  \"password\": \"12345678\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "f3ca840a-f86d-492a-b594-6dda5b821c78",
+            "colId": "5906f20e-1525-496a-9190-5f47a954002b",
+            "containerId": "6bf1e0ef-12ae-486b-bef9-444fcc3a1669",
+            "name": "register",
+            "url": "http://localhost:8000/client/register",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2025-01-22T16:00:24.791Z",
+            "modified": "2025-01-22T22:46:10.626Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"guilherme.amf187@gmail.com\",\n  \"password\": \"12345678\",\n  \"name\": \"Guilherme\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "51a6bf68-4edc-40ba-aeb1-8ac2c7aee895",
+            "colId": "5906f20e-1525-496a-9190-5f47a954002b",
+            "containerId": "59853319-d0f1-4e7b-a1bb-530d504b8058",
+            "name": "Buscar lista por id usuario",
+            "url": "http://localhost:3000/favorite-list/01949050-d085-7537-9293-16c11958aa5e",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2025-01-22T16:06:07.661Z",
+            "modified": "2025-01-23T06:48:05.974Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc2MDQyODEsImV4cCI6MTczNzY5MDY4MX0.RzQc9DjkLrQu2CQz4j86aghUm0bMbVEbsyO95VTL9n8"
+            }
+        },
+        {
+            "_id": "9035b7a3-b5fb-4011-af88-aa36a1d7613b",
+            "colId": "5906f20e-1525-496a-9190-5f47a954002b",
+            "containerId": "59853319-d0f1-4e7b-a1bb-530d504b8058",
+            "name": "Criar lista",
+            "url": "http://localhost:8000/favorite-list",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2025-01-22T16:06:50.680Z",
+            "modified": "2025-01-23T04:24:27.831Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"description\": \"teste\",\n \"title\": \"teste\",\n \"userId\":\"01949050-d085-7537-9293-16c11958aa5e\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k"
+            }
+        },
+        {
+            "_id": "df53b907-4b5b-40a9-9b92-f96fef065565",
+            "colId": "5906f20e-1525-496a-9190-5f47a954002b",
+            "containerId": "59853319-d0f1-4e7b-a1bb-530d504b8058",
+            "name": "Atualizar lista",
+            "url": "http://localhost:8000/favorite-list/01949050-d085-7537-9293-16c11958aa5e",
+            "method": "PATCH",
+            "sortNum": 50000,
+            "created": "2025-01-22T16:15:11.324Z",
+            "modified": "2025-01-22T23:25:55.369Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"Titulo atualizado 2\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k"
+            }
+        },
+        {
+            "_id": "9cb2ad74-86ce-457f-a53f-f1a1ddd98e40",
+            "colId": "5906f20e-1525-496a-9190-5f47a954002b",
+            "containerId": "59853319-d0f1-4e7b-a1bb-530d504b8058",
+            "name": "Excluir lista",
+            "url": "http://localhost:8000/favorite-list/01949050-d085-7537-9293-16c11958aa5e",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2025-01-22T16:20:20.673Z",
+            "modified": "2025-01-22T23:26:06.194Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k"
+            }
+        },
+        {
+            "_id": "7cc3cd4f-b1dc-413b-af1b-73d8af3a777f",
+            "colId": "5906f20e-1525-496a-9190-5f47a954002b",
+            "containerId": "59853319-d0f1-4e7b-a1bb-530d504b8058",
+            "name": "Favoritar produto",
+            "url": "http://localhost:8000/favorite-list/01949050-d085-7537-9293-16c11958aa5e/favorite-product",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2025-01-22T16:37:58.878Z",
+            "modified": "2025-01-23T05:50:35.305Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n   \"productApiId\": 3,\r\n    \"title\": \"Mens Cotton Jacket\",\r\n    \"price\": 55.99,\r\n    \"description\": \"great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.\",\r\n    \"category\": \"men's clothing\",\r\n    \"image\": \"https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg\"\r\n  }",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k"
+            }
+        },
+        {
+            "_id": "329517d5-14cb-461e-8715-20a05e05becf",
+            "colId": "5906f20e-1525-496a-9190-5f47a954002b",
+            "containerId": "59853319-d0f1-4e7b-a1bb-530d504b8058",
+            "name": "Desfavoritar produto",
+            "url": "http://localhost:8000/favorite-list/01949050-d085-7537-9293-16c11958aa5e/unfavorite-product",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2025-01-23T00:36:52.575Z",
+            "modified": "2025-01-23T06:20:36.710Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "  {\n    \"productApiId\": null\n  }",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k"
+            }
+        }
+    ],
+    "ref": "XMgfAL8Thd81vf7vHhKQ8q2DZwCulX-TK1cjNgTmo-ef-GVDIyWFNRI8xm4Y4aJXx22fh1Jb7s-doNhddAmvYw"
+}

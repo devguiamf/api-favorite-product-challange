@@ -14,7 +14,10 @@ Este projeto foi desenv olvido utilizando NestJS e MongoDB, seguindo a arquitetu
 ### Método Manual
 1. Clone o repositório:
     ```bash
-    git clone api-favorite-product-challenge
+    git clone https://github.com/devguiamf/api-favorite-product-challenge.git
+    ```
+
+    ```bash
     cd api-favorite-product-challenge
     ```
 2. Instale as dependências:
@@ -31,7 +34,10 @@ Este projeto foi desenv olvido utilizando NestJS e MongoDB, seguindo a arquitetu
 ### Com Docker
 1. Clone o repositório:
     ```bash
-    git clone api-favorite-product-challenge
+    git clone https://github.com/devguiamf/api-favorite-product-challenge.git
+    ```
+
+    ```bash
     cd api-favorite-product-challenge
     ```
 2. Configure o arquivo `.env` com as variáveis `JWT_SECRET`, `JWT_EXPIRES_IN` e `MONGO_URI` conforme o `.env.example`. A variável `MONGO_URI` deve conter a URL da sua instância MongoDB.
@@ -40,6 +46,9 @@ Este projeto foi desenv olvido utilizando NestJS e MongoDB, seguindo a arquitetu
     ```bash
     docker-compose up
     ```
+
+### Testes nos endpoints
+Utilize o arquivo `thunder-collection_test-api.json` para importar a coleção no Thunder Cliente (rangav.vscode-thunder-client) ou o arquivo `thunder-collection_postman_test-api.json` para importar a coleção no Postman
 
 ### Possiveis melhorias 🔧
 Ideias de melhoria para o projeto que não foram aplicados:
