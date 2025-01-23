@@ -11,9 +11,8 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
-      - PORT=3000
+      - PORT=8000
       - MONGO_URI=mongodb+srv://guilabs:a7k4f8atx@favorite-products.ddbkg.mongodb.net/?retryWrites=true&w=majority&appName=favorite-products
     ports:
-      - 3000:3000
+      - 8000:8000
     command: npm run start:dev
-    
