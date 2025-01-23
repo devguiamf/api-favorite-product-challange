@@ -1,0 +1,19 @@
+services:
+  api:
+    container_name: api-favorite-products-challenge
+    image: api-favorite-producst-challenge-dev
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - MONGO_URI=mongodb+srv://guilabs:a7k4f8atx@favorite-products.ddbkg.mongodb.net/?retryWrites=true&w=majority&appName=favorite-products
+    ports:
+      - 3000:3000
+    command: npm run start:dev
+    
