@@ -1,7 +1,48 @@
+# services:
+#   api:
+#     container_name: api-favorite-products-challenge
+#     image: api-favorite-producst-challenge-dev
+#     restart: unless-stopped
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     volumes:
+#       - .:/app
+#       - /app/node_modules
+#     environment:
+#       - NODE_ENV=development
+#       - PORT=8000
+#       - MONGO_URI=mongodb://root:root@mongodb:27017
+#     ports:
+#       - 8000:8000
+#     networks:
+#       - nest
+#     depends_on:
+#       - mongodb
+#     command: npm run start:dev
+
+#   mongodb:
+#     container_name: mongodb
+#     image: mongo
+#     volumes:
+#       - .mongodb:/data/db
+#     ports:
+#       - 27017:27017
+#     networks:
+#       - nest
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: root
+#       MONGO_INITDB_ROOT_PASSWORD: root
+#     command: mongod --auth
+
+# networks:
+#   nest:
+#     driver: bridge
+
 services:
   api:
     container_name: api-favorite-products-challenge
-    image: api-favorite-producst-challenge-dev
+    image: api-favorite-products-challenge-dev
     restart: unless-stopped
     build:
       context: .
@@ -16,24 +57,28 @@ services:
     ports:
       - 8000:8000
     networks:
-    - nest
+      - nest
     depends_on:
       - mongodb
     command: npm run start:dev
-    
+
   mongodb:
-      container_name: mongodb
-      image: mongo
-      volumes:
-        - .mongodb:/data/db
-      ports:
-        - 27017:27017
-      networks:
-        - nest
-      environment:
-        MONGO_INITDB_ROOT_USERNAME: root
-        MONGO_INITDB_ROOT_PASSWORD: root
-      command: mongod --auth
+    container_name: mongodb
+    image: mongo:latest
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - nest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    command: mongod --auth
+
 networks:
-    nest:
-      driver: bridge
+  nest:
+    driver: bridge
+
+volumes:
+  mongodb_data:

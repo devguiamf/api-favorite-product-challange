@@ -10,6 +10,8 @@ export const MONGO_DB_CONNECTION_PROVIDER: Provider<MongoClient> = {
   useFactory: async (envService: EnvService) => {
     const MONGO_URI = envService.get('MONGO_URI');
 
+    console.log('Connecting to MongoDB: ', MONGO_URI);
+
     const client = await new MongoClient(MONGO_URI, {
       maxPoolSize: 100,
     }).connect();
