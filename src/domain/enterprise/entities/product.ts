@@ -11,13 +11,10 @@ export type ProductProps = {
 };
 
 export class Product extends Entity<ProductProps> {
-
-
   public static create(
-    props: ProductProps,
-    id: UniqueEntityID,
+    props: ProductProps
   ): Product {
-    return new Product(props, id);
+    return new Product(props);
   }
 
   public static restore(
