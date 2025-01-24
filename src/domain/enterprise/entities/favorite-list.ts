@@ -15,8 +15,6 @@ export type FavoriteListProps = {
 };
 
 export class FavoriteList extends Entity<FavoriteListProps> {
-  #newFavoritedProducts: Product[] = [];
-
   favoriteProduct(newProduct: Product, favoritList: FavoriteList) {
 
     if(favoritList.products.length >= 5) {
