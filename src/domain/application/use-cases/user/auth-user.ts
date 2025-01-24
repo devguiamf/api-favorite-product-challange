@@ -5,9 +5,9 @@ import { Hasher } from '../../cryptography/hasher';
 import { Encrypter } from '../../cryptography/encrypter';
 import { EnvService } from 'src/infra/env/env.service';
 import { UserPayload } from 'src/infra/auth/jwt.strategy';
-import { User } from 'src/domain/enterprise/entities/customer';
+import { User } from 'src/domain/enterprise/entities/user';
 import { UserRepository } from '../../repositories/user-repository.interface';
-import { UserNotFoundError } from './errors/customer-not-found';
+import { UserNotFoundError } from './errors/user-not-found';
 
 export type AuthUserRequest = {
   email: Email;

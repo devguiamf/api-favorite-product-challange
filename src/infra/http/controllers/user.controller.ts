@@ -1,13 +1,19 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ZodValidationPipe } from '../pipes/zod-validation.pipe';
 import { Public } from 'src/infra/auth/public.decorator';
-import { AuthUserUseCase } from 'src/domain/application/use-cases/customer/auth-user';
-import { RegisterUserUseCase } from 'src/domain/application/use-cases/customer/register-user';
-import { AuthUserSchema, TAuthUserSchema } from './schema/customer/auth-customer.schema';
-import { UserHttpResponse, UserPresenter } from './presenters/customer.presenter';
+import { AuthUserUseCase } from 'src/domain/application/use-cases/user/auth-user';
+import { RegisterUserUseCase } from 'src/domain/application/use-cases/user/register-user';
+import {
+  AuthUserSchema,
+  TAuthUserSchema,
+} from './schema/user/auth-user.schema';
+import { UserHttpResponse, UserPresenter } from './presenters/user.presenter';
 import { Email } from 'src/domain/enterprise/entities/value-objects/email';
-import { User } from 'src/domain/enterprise/entities/customer';
-import { RegisterUserSchema, TRegisterUserSchema } from './schema/customer/register-customer.schema';
+import { User } from 'src/domain/enterprise/entities/user';
+import {
+  RegisterUserSchema,
+  TRegisterUserSchema,
+} from './schema/user/register-user.schema';
 
 @Public()
 @Controller('client')

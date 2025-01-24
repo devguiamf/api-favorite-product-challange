@@ -6,7 +6,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ParsedQs } from 'qs';
 import { z } from 'zod';
 import { EnvService } from '../env/env.service';
-import { GetUserUseCase } from 'src/domain/application/use-cases/customer/get-user';
+import { GetUserUseCase } from 'src/domain/application/use-cases/user/get-user';
 
 const tokenPayloadSchema = z.object({
   sub: z.string().uuid(),

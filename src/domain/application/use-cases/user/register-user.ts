@@ -4,7 +4,7 @@ import { EmailIsAlreadyExistError } from './errors/email-already-exist';
 import { UseCase } from 'src/core/types/use-case';
 import { Hasher } from '../../cryptography/hasher';
 import { UserRepository } from '../../repositories/user-repository.interface';
-import { User } from 'src/domain/enterprise/entities/customer';
+import { User } from 'src/domain/enterprise/entities/user';
 
 export type RegisterUserRequest = {
   email: Email;

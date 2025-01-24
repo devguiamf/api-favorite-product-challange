@@ -1,279 +1,246 @@
 {
-    "info": {
-        "_postman_id": "a7fc8d5e-0174-4917-907c-cd717d1110c5",
-        "name": "test-api",
-        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-        "description": ""
-    },
-    "item": [
+  "info": {
+    "_postman_id": "a7fc8d5e-0174-4917-907c-cd717d1110c5",
+    "name": "test-api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": ""
+  },
+  "item": [
+    {
+      "name": "user",
+      "item": [
         {
-            "name": "customer",
-            "item": [
-                {
-                    "name": "auth",
-                    "request": {
-                        "method": "POST",
-                        "url": {
-                            "raw": "http://localhost:8000/client/auth",
-                            "path": [
-                                "client",
-                                "auth"
-                            ],
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8000"
-                        },
-                        "body": {
-                            "mode": "raw",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            },
-                            "raw": "{\n  \"email\": \"guilherme.amf187@gmail.com\",\n  \"password\": \"12345678\"\n}"
-                        }
-                    }
-                },
-                {
-                    "name": "register",
-                    "request": {
-                        "method": "POST",
-                        "url": {
-                            "raw": "http://localhost:8000/client/register",
-                            "path": [
-                                "client",
-                                "register"
-                            ],
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8000"
-                        },
-                        "body": {
-                            "mode": "raw",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            },
-                            "raw": "{\n  \"email\": \"guilherme.amf187@gmail.com\",\n  \"password\": \"12345678\",\n  \"name\": \"Guilherme\"\n}"
-                        }
-                    }
+          "name": "auth",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8000/client/auth",
+              "path": ["client", "auth"],
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000"
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
                 }
-            ]
+              },
+              "raw": "{\n  \"email\": \"guilherme.amf187@gmail.com\",\n  \"password\": \"12345678\"\n}"
+            }
+          }
         },
         {
-            "name": "favorite-list",
-            "item": [
-                {
-                    "name": "Buscar lista por id usuario",
-                    "request": {
-                        "method": "GET",
-                        "url": {
-                            "raw": "http://localhost:3000/favorite-list/01949050-d085-7537-9293-16c11958aa5e",
-                            "path": [
-                                "favorite-list",
-                                "01949050-d085-7537-9293-16c11958aa5e"
-                            ],
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "3000"
-                        },
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [
-                                {
-                                    "key": "token",
-                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc2MDQyODEsImV4cCI6MTczNzY5MDY4MX0.RzQc9DjkLrQu2CQz4j86aghUm0bMbVEbsyO95VTL9n8",
-                                    "type": "string"
-                                }
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Criar lista",
-                    "request": {
-                        "method": "POST",
-                        "url": {
-                            "raw": "http://localhost:8000/favorite-list",
-                            "path": [
-                                "favorite-list"
-                            ],
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8000"
-                        },
-                        "body": {
-                            "mode": "raw",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            },
-                            "raw": "{\n \"description\": \"teste\",\n \"title\": \"teste\",\n \"userId\":\"01949050-d085-7537-9293-16c11958aa5e\"\n}"
-                        },
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [
-                                {
-                                    "key": "token",
-                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k",
-                                    "type": "string"
-                                }
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Atualizar lista",
-                    "request": {
-                        "method": "PATCH",
-                        "url": {
-                            "raw": "http://localhost:8000/favorite-list/01949050-d085-7537-9293-16c11958aa5e",
-                            "path": [
-                                "favorite-list",
-                                "01949050-d085-7537-9293-16c11958aa5e"
-                            ],
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8000"
-                        },
-                        "body": {
-                            "mode": "raw",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            },
-                            "raw": "{\n  \"title\": \"Titulo atualizado 2\"\n}"
-                        },
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [
-                                {
-                                    "key": "token",
-                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k",
-                                    "type": "string"
-                                }
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Excluir lista",
-                    "request": {
-                        "method": "DELETE",
-                        "url": {
-                            "raw": "http://localhost:8000/favorite-list/01949050-d085-7537-9293-16c11958aa5e",
-                            "path": [
-                                "favorite-list",
-                                "01949050-d085-7537-9293-16c11958aa5e"
-                            ],
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8000"
-                        },
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [
-                                {
-                                    "key": "token",
-                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k",
-                                    "type": "string"
-                                }
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Favoritar produto",
-                    "request": {
-                        "method": "POST",
-                        "url": {
-                            "raw": "http://localhost:8000/favorite-list/01949050-d085-7537-9293-16c11958aa5e/favorite-product",
-                            "path": [
-                                "favorite-list",
-                                "01949050-d085-7537-9293-16c11958aa5e",
-                                "favorite-product"
-                            ],
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8000"
-                        },
-                        "body": {
-                            "mode": "raw",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            },
-                            "raw": "{\r\n   \"productApiId\": 3,\r\n    \"title\": \"Mens Cotton Jacket\",\r\n    \"price\": 55.99,\r\n    \"description\": \"great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.\",\r\n    \"category\": \"men's clothing\",\r\n    \"image\": \"https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg\"\r\n  }"
-                        },
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [
-                                {
-                                    "key": "token",
-                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k",
-                                    "type": "string"
-                                }
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "Desfavoritar produto",
-                    "request": {
-                        "method": "POST",
-                        "url": {
-                            "raw": "http://localhost:8000/favorite-list/01949050-d085-7537-9293-16c11958aa5e/unfavorite-product",
-                            "path": [
-                                "favorite-list",
-                                "01949050-d085-7537-9293-16c11958aa5e",
-                                "unfavorite-product"
-                            ],
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "8000"
-                        },
-                        "body": {
-                            "mode": "raw",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            },
-                            "raw": "  {\n    \"productApiId\": null\n  }"
-                        },
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [
-                                {
-                                    "key": "token",
-                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k",
-                                    "type": "string"
-                                }
-                            ]
-                        }
-                    }
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8000/client/register",
+              "path": ["client", "register"],
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000"
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
                 }
-            ]
+              },
+              "raw": "{\n  \"email\": \"guilherme.amf187@gmail.com\",\n  \"password\": \"12345678\",\n  \"name\": \"Guilherme\"\n}"
+            }
+          }
         }
-    ]
+      ]
+    },
+    {
+      "name": "favorite-list",
+      "item": [
+        {
+          "name": "Buscar lista por id usuario",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/favorite-list/01949050-d085-7537-9293-16c11958aa5e",
+              "path": ["favorite-list", "01949050-d085-7537-9293-16c11958aa5e"],
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc2MDQyODEsImV4cCI6MTczNzY5MDY4MX0.RzQc9DjkLrQu2CQz4j86aghUm0bMbVEbsyO95VTL9n8",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Criar lista",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8000/favorite-list",
+              "path": ["favorite-list"],
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000"
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n \"description\": \"teste\",\n \"title\": \"teste\",\n \"userId\":\"01949050-d085-7537-9293-16c11958aa5e\"\n}"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar lista",
+          "request": {
+            "method": "PATCH",
+            "url": {
+              "raw": "http://localhost:8000/favorite-list/01949050-d085-7537-9293-16c11958aa5e",
+              "path": ["favorite-list", "01949050-d085-7537-9293-16c11958aa5e"],
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000"
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"title\": \"Titulo atualizado 2\"\n}"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Excluir lista",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8000/favorite-list/01949050-d085-7537-9293-16c11958aa5e",
+              "path": ["favorite-list", "01949050-d085-7537-9293-16c11958aa5e"],
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Favoritar produto",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8000/favorite-list/01949050-d085-7537-9293-16c11958aa5e/favorite-product",
+              "path": [
+                "favorite-list",
+                "01949050-d085-7537-9293-16c11958aa5e",
+                "favorite-product"
+              ],
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000"
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\r\n   \"productApiId\": 3,\r\n    \"title\": \"Mens Cotton Jacket\",\r\n    \"price\": 55.99,\r\n    \"description\": \"great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.\",\r\n    \"category\": \"men's clothing\",\r\n    \"image\": \"https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg\"\r\n  }"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Desfavoritar produto",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8000/favorite-list/01949050-d085-7537-9293-16c11958aa5e/unfavorite-product",
+              "path": [
+                "favorite-list",
+                "01949050-d085-7537-9293-16c11958aa5e",
+                "unfavorite-product"
+              ],
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000"
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "  {\n    \"productApiId\": null\n  }"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTk0OTA1MC1kMDg1LTc1MzctOTI5My0xNmMxMTk1OGFhNWUiLCJpYXQiOjE3Mzc1ODgxNjEsImV4cCI6MTczNzY3NDU2MX0.BR6GhlY4L85MeE-BxEAA2Ik1CNIIBt3DQJQOWcBak8k",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
 }

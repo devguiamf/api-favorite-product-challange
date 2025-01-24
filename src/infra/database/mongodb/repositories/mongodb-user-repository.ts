@@ -4,7 +4,7 @@ import { MONGO_DB_CONNECTION } from '../mongodb-connection';
 import { UniqueEntityID } from 'src/core/entity/unique-entity-id';
 import { UserRepository } from 'src/domain/application/repositories/user-repository.interface';
 import { Email } from 'src/domain/enterprise/entities/value-objects/email';
-import { User } from 'src/domain/enterprise/entities/customer';
+import { User } from 'src/domain/enterprise/entities/user';
 
 export type UserDocument = {
   _id: string;
@@ -60,7 +60,7 @@ export class MongoDbUserRepository implements UserRepository {
       });
 
       if (!user) {
-        return null
+        return null;
       }
 
       return User.restore(

@@ -1,6 +1,6 @@
 import { UniqueEntityID } from 'src/core/entity/unique-entity-id';
 import { Repository } from 'src/core/types/repository';
-import { User } from 'src/domain/enterprise/entities/customer';
+import { User } from 'src/domain/enterprise/entities/user';
 import { Email } from 'src/domain/enterprise/entities/value-objects/email';
 
 export abstract class UserRepository implements Repository<User> {

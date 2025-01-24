@@ -1,4 +1,4 @@
-import { User } from "src/domain/enterprise/entities/customer";
+import { User } from 'src/domain/enterprise/entities/user';
 
 export type UserHttpResponse = {
   token: string;

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UseCase } from 'src/core/types/use-case';
 import { UniqueEntityID } from 'src/core/entity/unique-entity-id';
 import { EntityNotFoundError } from 'src/core/errors/commom/entity-not-found-error';
-import { User } from 'src/domain/enterprise/entities/customer';
+import { User } from 'src/domain/enterprise/entities/user';
 import { UserRepository } from '../../repositories/user-repository.interface';
 
 export type GetUserRequest = {

@@ -8,9 +8,9 @@ import { FavoriteProductUseCase } from 'src/domain/application/use-cases/favorit
 import { UnFavoriteProductUseCase } from 'src/domain/application/use-cases/favorite-list/unfavorite-product';
 import { FavoriteListController } from './controllers/favorite-list.controller';
 import { CryptographyModule } from '../cryptography/cryptography.module';
-import { UserController } from './controllers/customer.controller';
-import { AuthUserUseCase } from 'src/domain/application/use-cases/customer/auth-user';
-import { RegisterUserUseCase } from 'src/domain/application/use-cases/customer/register-user';
+import { UserController } from './controllers/user.controller';
+import { AuthUserUseCase } from 'src/domain/application/use-cases/user/auth-user';
+import { RegisterUserUseCase } from 'src/domain/application/use-cases/user/register-user';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],

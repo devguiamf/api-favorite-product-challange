@@ -7,7 +7,7 @@ import { EnvService } from '../env/env.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { JwtStrategy } from './jwt.strategy';
 import { DatabaseModule } from '../database/database.module';
-import { GetUserUseCase } from 'src/domain/application/use-cases/customer/get-user';
+import { GetUserUseCase } from 'src/domain/application/use-cases/user/get-user';
 
 @Module({
   imports: [
