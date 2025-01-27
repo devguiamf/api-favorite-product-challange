@@ -32,6 +32,12 @@ export class AuthUserUseCase
 
   async execute(request: AuthUserRequest): Promise<AuthUserResponse> {
     try {
+      let exist = await this.userRepo.existsByEmail(request.email);
+
+      if (!exist) {
+        throw new UserNotFoundError();
+      }
+
       const user = await this.userRepo.findByEmail(request.email);
 
       if (!user) {

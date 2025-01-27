@@ -7,9 +7,8 @@ import { mock } from 'jest-mock-extended';
 import { Hasher } from 'src/domain/application/cryptography/hasher';
 import { _ } from '@faker-js/faker/dist/airline-D6ksJFwG';
 import { User } from 'src/domain/enterprise/entities/user';
-import { makeUser } from 'test/mocks/domain/user.mock';
 
-function makeCreateCustomerRequest(
+function makeCreateUserRequest(
   modifications?: Partial<RegisterUserRequest>,
 ): RegisterUserRequest {
   return {
@@ -38,7 +37,7 @@ describe(`${RegisterUserUseCase.name}`, () => {
 
   it('should register a new user successfully', async () => {
 
-    const registerUserRequest = makeCreateCustomerRequest();
+    const registerUserRequest = makeCreateUserRequest();
     await sut.execute(registerUserRequest);
 
     const user = User.create({
@@ -59,7 +58,7 @@ describe(`${RegisterUserUseCase.name}`, () => {
   it('should throw an error when the email is already in use', async () => {
     userRepo.existsByEmail.mockResolvedValueOnce(true);
 
-    const registerUserRequest = makeCreateCustomerRequest();
+    const registerUserRequest = makeCreateUserRequest();
 
     await expect(sut.execute(registerUserRequest)).rejects.toThrow(
       new EmailIsAlreadyExistError(),
