@@ -5,11 +5,11 @@ export default {
   transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
-  testEnvironment: 'node',
+  // testEnvironment: 'node',
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths || {}, {
     prefix: '<rootDir>/',
   }),
   modulePaths: ['<rootDir>/src'],
   roots: ['<rootDir>/src'],
-  testMatch: ['**/*.spec.ts'],
+  testMatch: ['**/*.spec.ts']
 };

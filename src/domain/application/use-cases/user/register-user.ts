@@ -25,7 +25,7 @@ export class RegisterUserUseCase
 
   async execute(request: RegisterUserRequest): Promise<RegisterUserResponse> {
     try {
-      const user = await this.userRepo.findByEmail(request.email);
+      const user = await this.userRepo.existsByEmail(request.email);
 
       if (user) {
         throw new EmailIsAlreadyExistError();
