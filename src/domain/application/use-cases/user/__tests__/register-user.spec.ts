@@ -60,8 +60,6 @@ describe(`${RegisterUserUseCase.name}`, () => {
 
     const registerUserRequest = makeCreateUserRequest();
 
-    await expect(sut.execute(registerUserRequest)).rejects.toThrow(
-      new EmailIsAlreadyExistError(),
-    );
+    await expect(sut.execute(registerUserRequest)).rejects.toThrow('Email ja cadastrado');
   });
 });

@@ -1,13 +1,13 @@
 import { Email } from 'src/domain/enterprise/entities/value-objects/email';
 import { AuthUserRequest, AuthUserUseCase } from '../auth-user';
-import { en, faker } from '@faker-js/faker/.';
+import { faker } from '@faker-js/faker/.';
 import { MongoDbUserRepository } from 'src/infra/database/mongodb/repositories/mongodb-user-repository';
 import { Hasher } from 'src/domain/application/cryptography/hasher';
 import { Encrypter } from 'src/domain/application/cryptography/encrypter';
 import { EnvService } from 'src/infra/env/env.service';
 import { mock } from 'jest-mock-extended';
 import { User } from 'src/domain/enterprise/entities/user';
-import { UserNotFoundError } from '../errors/user-not-found';
+
 
 function makeAuthUserRequest(
   modifications?: Partial<AuthUserRequest>,
