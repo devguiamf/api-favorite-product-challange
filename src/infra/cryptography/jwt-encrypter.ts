@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { EnvService } from '../env/env.service';
-import { Encrypter, EncryptOptions } from 'src/domain/application/cryptography/encrypter';
+import {
+  Encrypter,
+  EncryptOptions,
+} from 'src/domain/application/cryptography/encrypter';
 
 @Injectable()
 export class JwtEncrypter implements Encrypter {
@@ -18,7 +21,7 @@ export class JwtEncrypter implements Encrypter {
       ...(options?.expiresIn && {
         expiresIn: this.msToSeconds(options.expiresIn),
       }),
-      secret: this.env.get('JWT_SECRET')
+      secret: this.env.get('JWT_SECRET'),
     });
   }
 
@@ -30,7 +33,7 @@ export class JwtEncrypter implements Encrypter {
     const secret = this.env.get('JWT_SECRET');
 
     return (await this.jwtService.verifyAsync(token, {
-      secret: secret
+      secret: secret,
     })) as T;
   }
 }

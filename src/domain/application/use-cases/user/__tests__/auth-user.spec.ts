@@ -8,7 +8,6 @@ import { EnvService } from 'src/infra/env/env.service';
 import { mock } from 'jest-mock-extended';
 import { User } from 'src/domain/enterprise/entities/user';
 
-
 function makeAuthUserRequest(
   modifications?: Partial<AuthUserRequest>,
 ): AuthUserRequest {

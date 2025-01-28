@@ -36,7 +36,6 @@ describe(`${RegisterUserUseCase.name}`, () => {
   });
 
   it('should register a new user successfully', async () => {
-
     const registerUserRequest = makeCreateUserRequest();
     await sut.execute(registerUserRequest);
 
@@ -44,7 +43,7 @@ describe(`${RegisterUserUseCase.name}`, () => {
       email: registerUserRequest.email,
       name: registerUserRequest.name,
       password: registerUserRequest.password,
-    })
+    });
 
     userRepo.findByEmail.mockResolvedValueOnce(user);
 
@@ -60,6 +59,8 @@ describe(`${RegisterUserUseCase.name}`, () => {
 
     const registerUserRequest = makeCreateUserRequest();
 
-    await expect(sut.execute(registerUserRequest)).rejects.toThrow('Email ja cadastrado');
+    await expect(sut.execute(registerUserRequest)).rejects.toThrow(
+      'Email ja cadastrado',
+    );
   });
 });

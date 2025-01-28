@@ -11,5 +11,5 @@ export default {
   }),
   modulePaths: ['<rootDir>/src'],
   roots: ['<rootDir>/src'],
-  testMatch: ['**/*.spec.ts']
+  testMatch: ['**/*.e2e-spec.ts']
 };

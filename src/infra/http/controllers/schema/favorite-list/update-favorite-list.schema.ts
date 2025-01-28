@@ -6,7 +6,10 @@ export const UpdateFavoriteListSchema = z
     description: z.string().optional(),
   })
   .refine((data) => data.title || data.description, {
-    message: 'Ao menos um dos campos (title ou description) deve ser fornecido!',
+    message:
+      'Ao menos um dos campos (title ou description) deve ser fornecido!',
   });
 
-export type TUpdateFavoriteListSchema = z.infer<typeof UpdateFavoriteListSchema>;
+export type TUpdateFavoriteListSchema = z.infer<
+  typeof UpdateFavoriteListSchema
+>;

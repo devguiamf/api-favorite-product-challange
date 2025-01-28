@@ -6,7 +6,8 @@ export class EntityNotFoundError extends BaseError {
     super({
       message: message ?? `Recurso não encontrado!`,
       code: HttpStatus.NOT_FOUND,
-      details: details ?? `A entidade ${entity} ${id && `- ${id}`} não foi encontrada`,
+      details:
+        details ?? `A entidade ${entity} ${id && `- ${id}`} não foi encontrada`,
     });
   }
 }

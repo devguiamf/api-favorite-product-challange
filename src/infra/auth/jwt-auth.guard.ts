@@ -4,12 +4,9 @@ import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { IS_PUBLIC_KEY } from './public.decorator';
 
-
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
-  constructor(
-    private reflector: Reflector
-  ) {
+  constructor(private reflector: Reflector) {
     super();
   }
 
@@ -25,7 +22,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     }
 
     let canActivate = await super.canActivate(context);
-
 
     const { user } = request;
 

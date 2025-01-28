@@ -1,4 +1,3 @@
-
 import { HttpStatus } from '@nestjs/common';
 import { BaseError } from 'src/core/errors/base-error';
 

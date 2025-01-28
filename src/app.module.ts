@@ -13,9 +13,9 @@ import { AuthModule } from './infra/auth/auth.module';
     }),
     EnvModule,
     HttpModule,
-    AuthModule
+    AuthModule,
   ],
   controllers: [],
-  providers: []
+  providers: [],
 })
 export class AppModule {}

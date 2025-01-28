@@ -1,5 +1,5 @@
-import { Entity } from "../entity/entity";
-import { UniqueEntityID } from "../entity/unique-entity-id";
+import { Entity } from '../entity/entity';
+import { UniqueEntityID } from '../entity/unique-entity-id';
 
 export interface Repository<TEntity = Entity<any>> {
   save?(entity: TEntity): Promise<void>;

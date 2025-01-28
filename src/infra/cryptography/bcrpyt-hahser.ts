@@ -1,4 +1,3 @@
-
 import { hash, compare } from 'bcrypt';
 import { Hasher } from 'src/domain/application/cryptography/hasher';
 

@@ -43,7 +43,7 @@ export class MongoDbFavoriteListRepository implements FavoriteListRepository {
         title: favoriteList.title,
         description: favoriteList.description,
         userId: favoriteList.userId.toString(),
-        products: []
+        products: [],
       });
     } catch (error) {
       throw error;
@@ -68,7 +68,7 @@ export class MongoDbFavoriteListRepository implements FavoriteListRepository {
       );
 
       if (!favoriteList) {
-        return null
+        return null;
       }
 
       return FavoriteList.restore(
@@ -166,7 +166,7 @@ export class MongoDbFavoriteListRepository implements FavoriteListRepository {
               };
             }),
           },
-        }
+        },
       );
     } catch (error) {
       throw error;

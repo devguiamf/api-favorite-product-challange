@@ -1,6 +1,5 @@
-import { FavoriteList } from "src/domain/enterprise/entities/favorite-list";
-import { Product } from "src/domain/enterprise/entities/product";
-
+import { FavoriteList } from 'src/domain/enterprise/entities/favorite-list';
+import { Product } from 'src/domain/enterprise/entities/product';
 
 export type FavoriteListHttpResponse = {
   id: string;
@@ -27,9 +26,9 @@ export class FavoriteListPresenter {
           title: product.title,
           price: product.price,
           image: product.image,
-          productApiId: product.productApiId
+          productApiId: product.productApiId,
         };
-      })
-    };   
+      }),
+    };
   }
 }

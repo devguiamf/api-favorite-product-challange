@@ -1,5 +1,5 @@
-import { Entity } from "src/core/entity/entity";
-import { UniqueEntityID } from "src/core/entity/unique-entity-id";
+import { Entity } from 'src/core/entity/entity';
+import { UniqueEntityID } from 'src/core/entity/unique-entity-id';
 
 export type ProductProps = {
   productApiId: number;
@@ -11,16 +11,11 @@ export type ProductProps = {
 };
 
 export class Product extends Entity<ProductProps> {
-  public static create(
-    props: ProductProps
-  ): Product {
+  public static create(props: ProductProps): Product {
     return new Product(props);
   }
 
-  public static restore(
-    props: ProductProps,
-    id: UniqueEntityID,
-  ): Product {
+  public static restore(props: ProductProps, id: UniqueEntityID): Product {
     return new Product(props, id);
   }
 

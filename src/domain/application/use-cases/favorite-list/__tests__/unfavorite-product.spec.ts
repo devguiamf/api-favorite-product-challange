@@ -6,7 +6,10 @@ import {
 import { faker } from '@faker-js/faker/.';
 import { FavoriteListRepository } from 'src/domain/application/repositories/favorite-list-repository.interface';
 import { FavoriteList } from 'src/domain/enterprise/entities/favorite-list';
-import { makeFavoriteList, makeProducts } from '../../../../../../test/mocks/domain/favorite-list.mock';
+import {
+  makeFavoriteList,
+  makeProducts,
+} from '../../../../../../test/mocks/domain/favorite-list.mock';
 import { mock } from 'jest-mock-extended';
 
 function makeUnfavoriteProductRequest(
@@ -20,44 +23,44 @@ function makeUnfavoriteProductRequest(
 }
 
 describe(`${UnFavoriteProductUseCase.name}`, () => {
-    let sut: UnFavoriteProductUseCase;
-    let favoriteListRepo: jest.Mocked<FavoriteListRepository>;
-    let defaultFavoriteList: FavoriteList;
-    
-    beforeEach(() => {
-        defaultFavoriteList = makeFavoriteList();
-        defaultFavoriteList.products = makeProducts(3);
-        favoriteListRepo = mock<FavoriteListRepository>();
-        favoriteListRepo.exists.mockResolvedValue(true);
-        favoriteListRepo.findById.mockResolvedValue(defaultFavoriteList);
-        sut = new UnFavoriteProductUseCase(favoriteListRepo);
-    });
-    
-    it('should unfavorite a product', async () => {
-        const request = makeUnfavoriteProductRequest();
-        request.productId = defaultFavoriteList.products[0].productApiId;
-        
-        await sut.execute(request);
-    
-        expect(favoriteListRepo.exists).toHaveBeenCalledWith(
-        new UniqueEntityID(request.userId),
-        );
+  let sut: UnFavoriteProductUseCase;
+  let favoriteListRepo: jest.Mocked<FavoriteListRepository>;
+  let defaultFavoriteList: FavoriteList;
 
-        expect(favoriteListRepo.findById).toHaveBeenCalledWith(
-        new UniqueEntityID(request.userId),
-        );
+  beforeEach(() => {
+    defaultFavoriteList = makeFavoriteList();
+    defaultFavoriteList.products = makeProducts(3);
+    favoriteListRepo = mock<FavoriteListRepository>();
+    favoriteListRepo.exists.mockResolvedValue(true);
+    favoriteListRepo.findById.mockResolvedValue(defaultFavoriteList);
+    sut = new UnFavoriteProductUseCase(favoriteListRepo);
+  });
 
-        expect(favoriteListRepo.unfavoriteProduct).toHaveBeenCalled();
-    });
-    
-    it('should throw an error when the favorite list does not exist', async () => {
-        const request = makeUnfavoriteProductRequest();
-        favoriteListRepo.exists.mockResolvedValueOnce(false);
-    
-        await expect(sut.execute(request)).rejects.toThrow(
-        'Lista de favoritos não encontrada',
-        );
-    
-        expect(favoriteListRepo.exists).toHaveBeenCalled;
-    });
+  it('should unfavorite a product', async () => {
+    const request = makeUnfavoriteProductRequest();
+    request.productId = defaultFavoriteList.products[0].productApiId;
+
+    await sut.execute(request);
+
+    expect(favoriteListRepo.exists).toHaveBeenCalledWith(
+      new UniqueEntityID(request.userId),
+    );
+
+    expect(favoriteListRepo.findById).toHaveBeenCalledWith(
+      new UniqueEntityID(request.userId),
+    );
+
+    expect(favoriteListRepo.unfavoriteProduct).toHaveBeenCalled();
+  });
+
+  it('should throw an error when the favorite list does not exist', async () => {
+    const request = makeUnfavoriteProductRequest();
+    favoriteListRepo.exists.mockResolvedValueOnce(false);
+
+    await expect(sut.execute(request)).rejects.toThrow(
+      'Lista de favoritos não encontrada',
+    );
+
+    expect(favoriteListRepo.exists).toHaveBeenCalled;
+  });
 });

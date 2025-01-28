@@ -4,13 +4,13 @@ import { DefaultExceptionFilter } from './infra/http/filters/default-exception-f
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+
   app.useGlobalFilters(new DefaultExceptionFilter());
 
   app.enableCors({
-    origin: '*', 
-    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'], 
-    allowedHeaders: ['Content-Type', 'Authorization'], 
+    origin: '*',
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   });
 

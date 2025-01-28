@@ -26,7 +26,7 @@ export function makeProducts(length: number): Product[] {
       price: Number(faker.commerce.price()),
       image: faker.image.url(),
       category: faker.commerce.department(),
-      productApiId: faker.number.int()
+      productApiId: faker.number.int(),
     });
   });
 }

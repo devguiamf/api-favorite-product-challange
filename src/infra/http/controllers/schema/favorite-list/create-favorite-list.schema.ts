@@ -12,4 +12,6 @@ export const CreateFavoriteListSchema = z.object({
   description: z.string().optional().default(''),
 });
 
-export type TCreateFavoriteListSchema = z.infer<typeof CreateFavoriteListSchema>;
+export type TCreateFavoriteListSchema = z.infer<
+  typeof CreateFavoriteListSchema
+>;
