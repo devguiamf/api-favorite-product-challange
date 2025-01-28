@@ -32,7 +32,7 @@ export class UnFavoriteProductUseCase
         new UniqueEntityID(request.userId),
       );
 
-      if(!favoriteList) throw new FavoriteListNotFoundError();
+      if (!favoriteList) throw new FavoriteListNotFoundError();
 
       favoriteList.unfavoriteProduct(request.productId, favoriteList.products);
 
