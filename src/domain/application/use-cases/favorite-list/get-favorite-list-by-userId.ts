@@ -27,7 +27,7 @@ export class GetFavoriteListByIdUseCase {
           'FavoriteList',
           request.userId,
           'Lista de favoritos não encontrada para este usuário',
-          "Verifique se o id do usuário está correto"
+          'Verifique se o id do usuário está correto',
         );
       }
 
