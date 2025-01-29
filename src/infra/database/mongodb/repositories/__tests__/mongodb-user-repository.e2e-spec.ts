@@ -5,10 +5,12 @@ import {
 } from '../mongodb-user-repository';
 import { Collection, MongoClient } from 'mongodb';
 import { makeFakeApp } from '../../../../../../test/utils/make-fake-app';
-import { DatabaseModule } from '@faker-js/faker/.';
+
 import { UserRepository } from 'src/domain/application/repositories/user-repository.interface';
 import { MONGO_DB_CONNECTION } from '../../mongodb-connection';
 import { makeUser } from '../../../../../../test/mocks/domain/user.mock';
+import { DatabaseModule } from 'src/infra/database/database.module';
+import { flushMongoDb } from '../../../../../../test/utils/mongodb.utils';
 
 describe(`${MongoDbUserRepository.name}`, () => {
   let app: INestApplication;
@@ -26,13 +28,14 @@ describe(`${MongoDbUserRepository.name}`, () => {
     sut = module.get(UserRepository);
     connection = module.get(MONGO_DB_CONNECTION);
 
-    collection = connection.db().collection('users');
+    collection = connection.db().collection('user');
 
     await app.init();
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     jest.useFakeTimers();
+    await flushMongoDb();
   });
 
   describe('save()', () => {

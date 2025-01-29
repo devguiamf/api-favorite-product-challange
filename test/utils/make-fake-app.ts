@@ -5,6 +5,8 @@ import { AppModule } from 'src/app.module';
 export function makeFakeApp(
   modifications?: Partial<ModuleMetadata>,
 ): TestingModuleBuilder {
+  console.log('modifications', modifications);
+  
   return Test.createTestingModule({
     ...modifications,
     imports: [AppModule, ...(modifications?.imports ?? [])],

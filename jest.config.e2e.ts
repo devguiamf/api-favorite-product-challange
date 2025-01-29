@@ -1,7 +1,9 @@
 import { pathsToModuleNameMapper } from 'ts-jest';
 import { compilerOptions } from './tsconfig.json';
+import type { Config } from 'jest';
 
-export default {
+
+const config: Config = {
   transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
@@ -11,5 +13,9 @@ export default {
   }),
   modulePaths: ['<rootDir>/src'],
   roots: ['<rootDir>/src'],
-  testMatch: ['**/*.e2e-spec.ts']
+  testMatch: ['**/*.e2e-spec.ts'],
+  globalSetup: '<rootDir>/test/global-setup.e2e.ts',
+  globalTeardown: '<rootDir>/test/teardown-setup.e2e.ts'
 };
+
+export default config
